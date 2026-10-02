@@ -1,5 +1,4 @@
 # Лаб 05 — API систем тест: Postman ба Newman
-
 **Оюутан:** Эрдэнэтөр Бүрэнбаяр
 **Оюутны код:** B242270084
 
@@ -7,12 +6,12 @@
 
 ```
 $ node -v
-NODE_VERSION_OUTPUT
+v20.20.2
 ```
 
 ```
 $ newman -v
-NEWMAN_VERSION_OUTPUT
+6.2.2
 ```
 
 ## Даалгавар 2: Тест дизайн
@@ -73,14 +72,26 @@ NEWMAN_VERSION_OUTPUT
 
 | Ажиллуулалт | Файл | requests | assertions executed | assertions failed | exit code |
 |---|---|---|---|---|---|
-| PASS | `results/newman-pass.txt` | PASS_REQ | **PASS_ASSERT** | PASS_FAILED | PASS_EXIT |
-| FAIL (`lab05-collection-fail.json`) | `results/newman-fail.txt` | FAIL_REQ | FAIL_ASSERT | **FAIL_FAILED** | FAIL_EXIT |
-| DOWN (сервер унтарсан) | `results/newman-down.txt` | DOWN_REQ | DOWN_ASSERT | DOWN_FAILED | DOWN_EXIT |
+| PASS | `results/newman-pass.txt` | 29 | **47** | 0 | 0 |
+| FAIL (`lab05-collection-fail.json`) | `results/newman-fail.txt` | 29 | 47 | **1** | 1 |
+| DOWN (сервер унтарсан) | `results/newman-down.txt` | 29 | 47 | 47 | 1 |
 
-- **Тестийн / assertion-ы тоо:** **PASS_ASSERT** (`newman-pass.txt`-ийн `assertions executed`)
+- **Тестийн / assertion-ы тоо:** **47** (`newman-pass.txt`-ийн `assertions executed`)
 - **FAIL:** S01-ийн статус oracle-ийг зориуд `201` → `200` болгосон (`Статус 200 (ЗОРИУД БУРУУ ORACLE)`). Newman `expected response to have status code 200 but got 201` гэж унаж, exit code 1 буцаасан. Энэ нь CI quality gate-д pipeline-ийг зогсооно.
 - **DOWN:** гаралтад `connect ECONNREFUSED 127.0.0.1:3000` гарсан. Энэ бол **интерфейсийн алдаа**: хүсэлт серверт огт хүрээгүй тул хариу ирээгүй. Харин FAIL нь **oracle-ийн алдаа**: сервер хариу өгсөн боловч хүлээгдэж буй утгатай таараагүй.
 
 ## Дүгнэлт
-
-ДҮГНЭЛТ_ЭНД
+ 1.
+Дизайны 5 алхмын аль нь хамгийн их бодол шаардсан бэ? Жишээ нь сонголт ба ангиудыг тодорхойлох, эсвэл давхар алдааны хослол сонгох.
+2.
+Ямар боломжгүй хослол таарсан бэ? Жишээ нь байхгүй оюутанд coursesTaken гэж байдаггүй.
+3.
+Давхар алдааны тестээр ямар дараалал тогтоосон бэ? Оюутан → идэвхтэй эсэх → хичээл → урьдач нөхцөл.
+4.
+Тестүүд согог олсон уу? Олоогүй бол сервер ямар тохиолдолд зөв ажилласныг бичнэ, жишээ нь хоосон "" ID-д 400 буцаасан.
+5.
+Яагаад registrationID-ийн яг утгыг шалгаагүй вэ, тест бүр яагаад өөрийн setup-тай байх ёстой вэ?
+6.
+FAIL ба DOWN-ийн ялгаа юу вэ? Oracle-ийн алдаа ба интерфейсийн алдаа, хоёулаа exit 1.
+7.
+Өчигдөр DOWN-ийг сервер асаалттай байхад ажиллуулж алдсан чинь өөрөө сургамж. Үүнийг бичвэл бодит, сайн өгүүлбэр болно.
